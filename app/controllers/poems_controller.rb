@@ -21,17 +21,16 @@ class PoemsController < ApplicationController
     @current_user_id = current_user.id
     the_poem = Poem.new
     the_poem.title = params.fetch("query_title")
-    OpenAI.api_key = ENV.fetch("OPENAI")
-    prompt = params.fetch("query_poem")
-    params = {
-      engine: "davinci-codex",
-      prompt: prompt,
-      temperature: 0.7,
-      max_tokens: 100,
-      stop: "\n\n"
-    }
-    response = OpenAI::TextCompletion.create(params)
-    the_poem.poem = response["choices"][0]["text"]
+    client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI"))
+    prompt = "Imageine you are a poet. Write a beautiful poem about "+params.fetch("query_poem")+" that is titled "+params.fetch("query_title")+". Respond with only the poem boyd itself."
+    response = client.chat(
+      parameters: {
+        model: "gpt-4",
+        messages: [{ role: "user", content: prompt}],
+        temperature: 0.8,
+      }
+    )
+    the_poem.poem = response.dig("choices", 0, "message", "content")
     the_poem.user_id = @current_user_id
 
     if the_poem.valid?

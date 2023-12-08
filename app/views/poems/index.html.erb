@@ -17,7 +17,7 @@
     <form action="/insert_poem" method="post">
       <div>
         <label for="title_box">
-          Title
+          What do you wnat your Poem to be titled?
         </label>
 
         <input type="text" id="title_box" name="query_title">
@@ -25,7 +25,7 @@
 
       <div>
         <label for="poem_box">
-          Poem
+          What do you want your Poem to be about?
         </label>
 
         <textarea id="poem_box" name="query_poem" rows="3"></textarea>
@@ -43,9 +43,6 @@
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           Title
@@ -60,22 +57,11 @@
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
       <% @list_of_poems.each do |a_poem| %>
       <tr>
-        <td>
-          <%= a_poem.id %>
-        </td>
 
         <td>
           <%= a_poem.title %>
@@ -87,13 +73,6 @@
 
         <td>
           <%= a_poem.user_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_poem.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_poem.updated_at) %> ago
         </td>
 
         <td>

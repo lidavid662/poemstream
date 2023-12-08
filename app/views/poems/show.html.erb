@@ -33,68 +33,7 @@
         <%= @the_poem.poem %>
       </dd>
 
-      <dt>
-        User
-      </dt>
-      <dd>
-        <%= @the_poem.user_id %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_poem.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_poem.updated_at) %> ago
-      </dd>
     </dl>
-  </div>
-</div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit poem
-    </h2>
-
-    <form action="/modify_poem/<%= @the_poem.id %>"  method="post" >
-      <div>
-        <label for="title_box">
-          Title
-        </label>
-
-        <input type="text" id="title_box" name="query_title" value="<%= @the_poem.title %>">
-      </div>
-
-      <div>
-        <label for="poem_box">
-          Poem
-        </label>
-
-        <textarea id="poem_box" name="query_poem"><%= @the_poem.poem %></textarea>
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_poem.user_id %>">
-      </div>
-
-      <button>
-        Update poem
-      </button>
-    </form>
   </div>
 </div>
 
