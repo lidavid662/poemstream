@@ -18,10 +18,21 @@ class PoemsController < ApplicationController
   end
 
   def create
+    @current_user_id = current_user.id
     the_poem = Poem.new
     the_poem.title = params.fetch("query_title")
-    the_poem.poem = params.fetch("query_poem")
-    the_poem.user_id = params.fetch("query_user_id")
+    OpenAI.api_key = ENV.fetch("OPENAI")
+    prompt = params.fetch("query_poem")
+    params = {
+      engine: "davinci-codex",
+      prompt: prompt,
+      temperature: 0.7,
+      max_tokens: 100,
+      stop: "\n\n"
+    }
+    response = OpenAI::TextCompletion.create(params)
+    the_poem.poem = response["choices"][0]["text"]
+    the_poem.user_id = @current_user_id
 
     if the_poem.valid?
       the_poem.save
