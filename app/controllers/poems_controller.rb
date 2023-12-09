@@ -23,11 +23,12 @@ class PoemsController < ApplicationController
     the_poem.title = params.fetch("query_title")
     client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI"))
     prompt = "Imageine you are a poet. Write a beautiful poem about "+params.fetch("query_poem")+" that is titled "+params.fetch("query_title")+". Respond with only the poem boyd itself."
+    temp = Float(params.fetch("query_temp"))
     response = client.chat(
       parameters: {
         model: "gpt-4",
         messages: [{ role: "user", content: prompt}],
-        temperature: 0.8,
+        temperature: temp,
       }
     )
     the_poem.poem = response.dig("choices", 0, "message", "content")

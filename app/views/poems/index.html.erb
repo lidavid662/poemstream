@@ -1,23 +1,24 @@
 <div>
   <div>
     <h1>
-      List of all poems
+      The Stream
     </h1>
   </div>
 </div>
 
 <hr>
 
+<% if current_user.present? %>
 <div>
   <div>
     <h2>
-      Add a new poem
+      Join the stream!
     </h2>
 
     <form action="/insert_poem" method="post">
       <div>
         <label for="title_box">
-          What do you wnat your Poem to be titled?
+          What do you want your Poem to be titled?
         </label>
 
         <input type="text" id="title_box" name="query_title">
@@ -28,7 +29,15 @@
           What do you want your Poem to be about?
         </label>
 
-        <textarea id="poem_box" name="query_poem" rows="3"></textarea>
+        <textarea id="poem_box" name="query_poem" rows="2" placeholder="How are you feeling today?"></textarea>
+      </div>
+
+      <div>
+        <label for="title_box">
+          How cursed do you want your poem to be? (0 to 1 for more cursed but creative)
+        </label>
+
+        <input type="text" id="title_box" name="query_temp">
       </div>
 
       <button>
@@ -37,6 +46,15 @@
     </form>
   </div>
 </div>
+<% else %>
+<div>
+  <div>
+    <h2>
+      You need to be signed in as a user to add to the stream!
+    </h2>
+  </div>
+</div>
+<% end %>
 
 <hr>
 <div>
