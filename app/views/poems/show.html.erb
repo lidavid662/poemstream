@@ -1,36 +1,35 @@
-<div>
-  <div>
+<div class="container">
+  <div class="row">
 
-    <div>
-      <div>
-        <a href="/poems">
+    <div class="col-md-6">
+      <div class="d-flex justify-content-between">
+        <a href="/poems" class="btn btn-secondary">
           Go back
         </a>
-      </div>
-
-      <div>
-        <a href="/delete_poem/<%= @the_poem.id %>">
+        <% if current_user.present? %>
+        <a href="/delete_poem/<%= @the_poem.id %>" class="btn btn-danger">
           Delete poem
         </a>
+        <% end %>
       </div>
+
+      <dl class="mt-4">
+        <dt class="text-primary">
+          Title
+        </dt>
+        <dd class="text-muted">
+          <%= @the_poem.title %>
+        </dd>
+
+        <dt class="text-primary mt-2">
+          Poem
+        </dt>
+        <dd class="text-muted">
+          <%= @the_poem.poem %>
+        </dd>
+
+      </dl>
     </div>
-
-    <dl>
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @the_poem.title %>
-      </dd>
-
-      <dt>
-        Poem
-      </dt>
-      <dd>
-        <%= @the_poem.poem %>
-      </dd>
-
-    </dl>
   </div>
 </div>
 
